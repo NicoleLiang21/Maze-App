@@ -1,0 +1,19 @@
+try (Scanner scan = new Scanner(new File("Maze-App/src/maze-1")))
+        {
+            col = scan.nextInt();
+            row = Integer.parseInt(scan.next().substring(1));
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    
+                }
+
+            }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Cannot open file");
+        }
