@@ -1,12 +1,12 @@
 public class Square {
 
-    private char type;
+    private int type;
     private int row, col;
 
     /*
      * Constructor for the Square class
      */
-    public Square(int r, int c, char t)
+    public Square(int r, int c, int t)
     {
         type = t;
         row = r;
@@ -35,25 +35,26 @@ public class Square {
      *  Accessor method for type
      *  @return int
      */
-    public char getType()
+    public int getType()
     {
         return type;
     }
 
     /*
      * toString method for this class
+     * We chose to display in symbols, but we take the type as a number since that's the way in which the source file was programmed
      */
     public String toString()
     {
         switch (type)
         {
-            case '#':
-                return "#";
-            case '_':
+            case 0:
                 return "_";
-            case 'S':
+            case '1':
+                return "#";
+            case '2':
                 return "S";
-            case 'E':
+            case '3':
                 return "E";
             case 'o':
                 return "o";
