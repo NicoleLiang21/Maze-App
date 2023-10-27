@@ -42,7 +42,6 @@ public class Square {
 
     /*
      * toString method for this class
-     * G
      */
     public String toString()
     {
