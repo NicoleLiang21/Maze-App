@@ -50,11 +50,11 @@ public class Square {
         {
             case 0:
                 return "_";
-            case '1':
+            case 1:
                 return "#";
-            case '2':
+            case 2:
                 return "S";
-            case '3':
+            case 3:
                 return "E";
             case 'o':
                 return "o";
