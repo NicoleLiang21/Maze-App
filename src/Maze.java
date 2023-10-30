@@ -16,20 +16,19 @@ public class Maze{
     {
         try (Scanner scan = new Scanner(new File(fname)))
         {
-
+            row = scan.nextInt();
             col = scan.nextInt();
-            row = Integer.parseInt(scan.next().substring(1));
-
             int[] types = new int[col*row];
+            System.out.println(types.length);
             int count = 0;
+            
             while (scan.hasNext()){
                 types[count] = scan.nextInt();
                 count++; 
+                
             }
-            System.out.println(types);
 
-
-            maze = new Square[col][row];
+            maze = new Square[row][col];
             count = 0;
             for (int i = 0; i < row; i++)
             {
@@ -56,12 +55,12 @@ public class Maze{
     public ArrayList<Square> getNeighbors(Square sq)
     {
         ArrayList<Square> list = new ArrayList<>();
-        int r = sq.getRow();
-        int c = sq.getCol();
-        if (c < col)  list.add(maze[r][c+1]);
-        if (r < row)  list.add(maze[r+1][c]);
-        if (r > 0) list.add(maze[r-1][c]);
-        if (c > 0)  list.add(maze[r][c-1]);
+        int r = sq.getRow()-1;
+        int c = sq.getCol()-1;
+        if (c != col)  list.add(maze[r][c+1]);
+        if (r != row)  list.add(maze[r+1][c]);
+        if (r != 0) list.add(maze[r-1][c]);
+        if (c != 0)  list.add(maze[r][c-1]);
         
         return list;
 
@@ -132,7 +131,7 @@ public class Maze{
                 {
                     data += maze[i][j];
                 }
-
+                data += "\n";
             }
         return data;
     }
