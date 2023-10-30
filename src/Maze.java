@@ -16,8 +16,32 @@ public class Maze{
     {
         try (Scanner scan = new Scanner(new File(fname)))
         {
+            // Setting up and verifying number of rows/columns
             row = scan.nextInt();
             col = scan.nextInt();
+
+            int rowC = -1;
+            while (scan.hasNextLine())
+            {
+                rowC++;
+                scan.nextLine();
+            }
+            if (rowC != row)
+            {
+                System.out.println("Invalid, number of rows described does not match with actual");
+                return false;
+            }
+
+            col = 0;
+
+
+
+
+
+
+
+
+            
             int[] types = new int[col*row];
             System.out.println(types.length);
             int count = 0;
