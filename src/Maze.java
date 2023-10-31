@@ -20,28 +20,44 @@ public class Maze{
             row = scan.nextInt();
             col = scan.nextInt();
 
-            int rowC = -1;
-            while (scan.hasNextLine())
+            // Second scanner
+            Scanner scan2 = new Scanner(new File(fname));
+
+            // Rows
+            scan2.nextLine();
+
+            int rowC = 0;
+            while (scan2.hasNextLine())
             {
                 rowC++;
-                scan.nextLine();
+                scan2.nextLine();
             }
             if (rowC != row)
             {
-                System.out.println("Invalid, number of rows described does not match with actual");
+                System.out.println("Invalid, number of rows described does not match with actual number");
                 return false;
             }
 
-            col = 0;
+            // Columns
+            Scanner scan3 = new Scanner(new File(fname));
+            scan3.nextLine();
 
-
-
-
-
-
-
-
+            String line = scan3.nextLine();
+            int colC = 2;
             
+            while (line.contains(" "))
+            {
+                colC++;
+                line = line.substring(line.indexOf(" "));
+            }
+            if (colC != col)
+            {
+                System.out.println("Invalid, number of columns described does not match with actual number");
+                return false;
+            }
+
+
+            // Create the maze
             int[] types = new int[col*row];
             System.out.println(types.length);
             int count = 0;
