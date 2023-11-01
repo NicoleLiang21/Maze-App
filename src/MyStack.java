@@ -3,32 +3,44 @@ import java.util.ArrayList;
 public class MyStack
 {
     // Tail of the ArrayList will be implemented as the 
-    ArrayList array = new ArrayList<>();
+    ArrayList array;
 
     /*
      * Constructor for stack class 
      */
     public MyStack()
     {
-        
+        array = new ArrayList<>();
     }
 
     /*
-     * .add() - add an element to this array
+     * push - add an element to the top of the stack
      * @param Object element
      */
+    public void push(Object element)
+    {
+        array.add(element);
+    }
 
     /*
-     * .get() - add an element to this array
-     * @param int index
+     * pop - get the first element from the top of the stack and removing
+     * @return Object element
      */
+    public Object pop()
+    {
+        Object element = array.get(array.size()-1);
+        array.remove(array.size()-1);
+
+        return element;
+    }
 
     /*
-     * .set() - set this index to hold this element
-     * @param int index, Object eleent
+     * peek - get the first element from the top of the stack without removing
+     * @return Object element
      */
+    public Object peek()
+    {
+        return array.remove(array.size()-1);
+    }
 
-    /*
-     * .remove() - remove the element at this index 
-     */
 }
