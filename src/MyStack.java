@@ -4,6 +4,7 @@ public class MyStack
 {
     // Tail of the ArrayList will be implemented as the 
     ArrayList array;
+    int size;
 
     /*
      * Constructor for stack class 
@@ -41,6 +42,15 @@ public class MyStack
     public Object peek()
     {
         return array.remove(array.size()-1);
+    }
+
+    /*
+     * size - return the size of the stack
+     * @return int size
+     */
+    public int size()
+    {
+        return array.size();
     }
 
 }
