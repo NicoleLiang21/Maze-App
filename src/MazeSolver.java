@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class MazeSolver {
     /*
      * creates empty worklist
@@ -50,12 +52,27 @@ public abstract class MazeSolver {
 
     }
 
-    public Square step(){
+    public Square step(){ 
+        if (worklist.size() == 0) return null;
+        current = (Square) worklist.remove();
+        if (current.getType() == 3){
+            getPath();
+        }
+        ArrayList<Square> neighbors = maze.getNeighbors(current);
+        for (Square sq : neighbors){
+            if ((sq.getType() != 1 || sq.getType() != 'o' || sq.getType() != '.') && !worklist.contains(sq))
+                worklist.add(sq);
+        }
         
+        Square sq = current;
+        current = new Square (current.getRow(), current.getCol(), '.');
+        return sq;
     }
 
     public void solve(){
         // call step method until it is solved
-
+        while (!isSolved() || worklist.size() != 0){
+            step();
+        }
     }
 }
