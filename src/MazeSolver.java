@@ -19,7 +19,9 @@ public abstract class MazeSolver {
      * @return square
      */
     abstract Square next();
-    private Square current; 
+
+    private MyQueue worklist;
+    private Square current;
     private Maze maze;
     
     MazeSolver(Maze m){
@@ -33,6 +35,18 @@ public abstract class MazeSolver {
     }
 
     public String getPath(){
+        String message = "";
+
+        if (worklist.size() == 0) message += "No such path exists; ";
+        else
+        {
+            while (worklist.size() != 0)
+                message += worklist.remove(); // .pop() for Stacks
+        }
+
+        if (isSolved())
+            return message + "the maze is solved";
+        return message + "the maze is not solved";
 
     }
 
