@@ -53,4 +53,18 @@ public class MyStack
         return array.size();
     }
 
+    /*
+     * contains - returns whether or not a stack contains an element
+     * @return Object element
+     */
+    public boolean contains(Object element)
+    {
+        for (int i = 0; i < array.size(); i++)
+            // can use ==; since same object = same memory location
+            if (array.get(i) == element) 
+                return true;
+                
+        return false;
+    }
+
 }
