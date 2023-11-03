@@ -4,6 +4,7 @@ public class MyStack
 {
     // Tail of the ArrayList will be implemented as the 
     ArrayList array;
+    int size;
 
     /*
      * Constructor for stack class 
@@ -41,6 +42,29 @@ public class MyStack
     public Object peek()
     {
         return array.remove(array.size()-1);
+    }
+
+    /*
+     * size - return the size of the stack
+     * @return int size
+     */
+    public int size()
+    {
+        return array.size();
+    }
+
+    /*
+     * contains - returns whether or not a stack contains an element
+     * @return Object element
+     */
+    public boolean contains(Object element)
+    {
+        for (int i = 0; i < array.size(); i++)
+            // can use ==; since same object = same memory location
+            if (array.get(i) == element) 
+                return true;
+                
+        return false;
     }
 
 }
