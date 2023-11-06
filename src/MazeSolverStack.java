@@ -52,7 +52,7 @@ public class MazeSolverStack extends MazeSolver
         return (Square) worklist.pop();
     }
     
-    private boolean isSolved(){
+    boolean isSolved(){
         if (worklist.size() == 0) return true;
         else if (current.getType() == 3) return true;
         return false;
