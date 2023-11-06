@@ -53,8 +53,8 @@ public class MazeSolverStack extends MazeSolver
     }
     
     private boolean isSolved(){
-        // if (worklist.size() == 0) return true;
-        if (current.getType() == 3) return true;
+        if (worklist.size() == 0) return true;
+        else if (current.getType() == 3) return true;
         return false;
     }
 
