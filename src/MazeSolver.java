@@ -30,7 +30,7 @@ public abstract class MazeSolver {
         maze = m;
     }
     
-    private boolean isSolved(){
+    boolean isSolved(){
         if (worklist.size() == 0) return true;
         if (current.getType() == 3) return true;
         return false;
