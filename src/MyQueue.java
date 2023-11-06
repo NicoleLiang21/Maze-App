@@ -1,10 +1,10 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class MyQueue {
 
     private LinkedList<Object> list;
     private int currentSize = 0;
-
 
     public MyQueue(){
         list = new LinkedList<Object>();
@@ -19,6 +19,8 @@ public class MyQueue {
         currentSize ++;
         list.add(obj);
     }
+
+    
     /*
      * removes object from the front of the linked list
      * @return object that is removed
@@ -35,7 +37,17 @@ public class MyQueue {
         return list.get(0);
     }
 
-
+    public boolean contains(Object obj)
+    {
+        
+        ListIterator<Object> iterator = list.listIterator();
+        while (iterator.hasNext()){
+            if (iterator.next() == obj){
+                return true;
+            }
+        }
+        return false;
+    }
     /*
      * getter for the size of the queue linked list
      * @return integer of the size of the linked list
@@ -43,5 +55,4 @@ public class MyQueue {
     public int size(){
         return currentSize;
     }
-
 }
