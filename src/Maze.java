@@ -16,10 +16,11 @@ public class Maze{
     {
         try (Scanner scan = new Scanner(new File(fname)))
         {
+             
             // Setting up and verifying number of rows/columns
             row = scan.nextInt();
             col = scan.nextInt();
-
+/*
             // Second scanner
             Scanner scan2 = new Scanner(new File(fname));
 
@@ -55,7 +56,7 @@ public class Maze{
                 System.out.println("Invalid, number of columns described does not match with actual number");
                 return false;
             }
-
+            */
 
             // Create the maze
             int[] types = new int[col*row];

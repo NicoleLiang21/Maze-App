@@ -65,116 +65,116 @@ public class MazeApp extends JFrame implements ActionListener {
      * Constructor -- does most of the work setting up the GUI.
      */
     public MazeApp() {
-	//Set up the frame
-	super("Amazing Maze Solver");
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-	//Field for the maze file name
-	filename = new JTextField(10);
-	filename.setEditable(false);
-	filename.setText("<no maze loaded>");
-	
-	//Timer and font size fields
-	timerField = new JTextField(5);
-	fontField  = new JTextField(5);
-	
-	//Glue text and input together
-	JPanel filenamePanel = new JPanel(new BorderLayout());
-	filenamePanel.add(new JLabel("File: "), "West");
-	filenamePanel.add(filename, "Center");
-	
-	JPanel fontPanel = new JPanel(new BorderLayout());
-	fontPanel.add(new JLabel("Font size:"), "West");
-	fontPanel.add(fontField, "Center");
-	
-	JPanel timerPanel = new JPanel(new BorderLayout());
-	timerPanel.add(new JLabel("Timer (ms):"), "West");
-	timerPanel.add(timerField, "Center");
-	
-	JPanel controls = new JPanel(new FlowLayout());
-	controls.add(timerPanel);
-	controls.add(fontPanel);
-	
-	//Create the buttons
-	loadButton = new JButton("load");
-	resetButton = new JButton("reset");
-	quitButton = new JButton("quit");
-	solverType = new JButton("stack");
-	solveButton = new JButton("start");
-	stepButton = new JButton("step");
+		//Set up the frame
+		super("Amazing Maze Solver");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//Field for the maze file name
+		filename = new JTextField(10);
+		filename.setEditable(false);
+		filename.setText("<no maze loaded>");
+		
+		//Timer and font size fields
+		timerField = new JTextField(5);
+		fontField  = new JTextField(5);
+		
+		//Glue text and input together
+		JPanel filenamePanel = new JPanel(new BorderLayout());
+		filenamePanel.add(new JLabel("File: "), "West");
+		filenamePanel.add(filename, "Center");
+		
+		JPanel fontPanel = new JPanel(new BorderLayout());
+		fontPanel.add(new JLabel("Font size:"), "West");
+		fontPanel.add(fontField, "Center");
+		
+		JPanel timerPanel = new JPanel(new BorderLayout());
+		timerPanel.add(new JLabel("Timer (ms):"), "West");
+		timerPanel.add(timerField, "Center");
+		
+		JPanel controls = new JPanel(new FlowLayout());
+		controls.add(timerPanel);
+		controls.add(fontPanel);
+		
+		//Create the buttons
+		loadButton = new JButton("load");
+		resetButton = new JButton("reset");
+		quitButton = new JButton("quit");
+		solverType = new JButton("stack");
+		solveButton = new JButton("start");
+		stepButton = new JButton("step");
 
-	//places to put all the top menu items
-	JPanel buttons1 = new JPanel(new GridLayout(1, 3));  //top row of buttons
-	JPanel buttons2 = new JPanel(new GridLayout(1, 3));  //bottom row of buttons
-	JPanel buttonBar = new JPanel(new GridLayout(2, 2)); //combined layout of buttons
-							     //and text
-	
-	//load up the buttons in L to R order
-	buttons1.add(loadButton);
-	buttons1.add(resetButton);
-	buttons1.add(quitButton);
-	buttons2.add(solverType);
-	buttons2.add(solveButton);
-	buttons2.add(stepButton);
-	
-	//Glue the components together row by row
-	buttonBar.add(filenamePanel); //top left
-	buttonBar.add(buttons1);      //top right
-	buttonBar.add(controls);      //bottom left
-	buttonBar.add(buttons2);      //bottom right
-	//add padding from edges
-	buttonBar.setBorder(BorderFactory.createEmptyBorder(10,10,0,10));
-	
-	//Timer for the animations
-	timer = new Timer(timerInterval, this);
-	
-	
-	//Set up the bottom area to show the maze and path
-	mazeDisplay = new JTextArea(20, 30);
-	mazeDisplay.setEditable(false);
-	pathDisplay = new JTextArea(4, 30);
-	pathDisplay.setEditable(false);
-JPanel pane = new JPanel(new BorderLayout());
-	pane.setBorder(BorderFactory.createEmptyBorder(
-                10, //top
-                10, //left
-                10, //bottom
-                10) //right
-                );
-	pane.add(new JScrollPane(mazeDisplay), "Center"); //let's maze be biggest
-	pane.add(new JScrollPane(pathDisplay), "South");
-	
-	//Create the overall layout (buttons on top, maze info below)
-	JPanel panel = new JPanel(new BorderLayout());
-	panel.add(buttonBar,"North");
-	panel.add(pane);
-	
-	//add to the frame
-	this.getContentPane().add(panel);
-	
-	//shrink wrap and display
-	this.pack();
-	this.setLocationRelativeTo(null);	//center
-	this.setVisible(true);
+		//places to put all the top menu items
+		JPanel buttons1 = new JPanel(new GridLayout(1, 3));  //top row of buttons
+		JPanel buttons2 = new JPanel(new GridLayout(1, 3));  //bottom row of buttons
+		JPanel buttonBar = new JPanel(new GridLayout(2, 2)); //combined layout of buttons
+									//and text
+		
+		//load up the buttons in L to R order
+		buttons1.add(loadButton);
+		buttons1.add(resetButton);
+		buttons1.add(quitButton);
+		buttons2.add(solverType);
+		buttons2.add(solveButton);
+		buttons2.add(stepButton);
+		
+		//Glue the components together row by row
+		buttonBar.add(filenamePanel); //top left
+		buttonBar.add(buttons1);      //top right
+		buttonBar.add(controls);      //bottom left
+		buttonBar.add(buttons2);      //bottom right
+		//add padding from edges
+		buttonBar.setBorder(BorderFactory.createEmptyBorder(10,10,0,10));
+		
+		//Timer for the animations
+		timer = new Timer(timerInterval, this);
+		
+		
+		//Set up the bottom area to show the maze and path
+		mazeDisplay = new JTextArea(20, 30);
+		mazeDisplay.setEditable(false);
+		pathDisplay = new JTextArea(4, 30);
+		pathDisplay.setEditable(false);
+		JPanel pane = new JPanel(new BorderLayout());
+		pane.setBorder(BorderFactory.createEmptyBorder(
+					10, //top
+					10, //left
+					10, //bottom
+					10) //right
+					);
+		pane.add(new JScrollPane(mazeDisplay), "Center"); //let's maze be biggest
+		pane.add(new JScrollPane(pathDisplay), "South");
+		
+		//Create the overall layout (buttons on top, maze info below)
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(buttonBar,"North");
+		panel.add(pane);
+		
+		//add to the frame
+		this.getContentPane().add(panel);
+		
+		//shrink wrap and display
+		this.pack();
+		this.setLocationRelativeTo(null);	//center
+		this.setVisible(true);
 
-	//Actionlisteners
-	loadButton.addActionListener(this);
-	filename.addActionListener(this);
-	solveButton.addActionListener(this);
-	solverType.addActionListener(this);
-	stepButton.addActionListener(this);
-	resetButton.addActionListener(this);
-	quitButton.addActionListener(this);
-	
-	timerField.addActionListener(this);
-	fontField.addActionListener(this);
-	
-	//Set up the class variables
-	doTimer();
-	doFontSize();
-	mazeLoaded = false;
-	this.maze = new Maze();
-	//makeNewSolver();
+		//Actionlisteners
+		loadButton.addActionListener(this);
+		filename.addActionListener(this);
+		solveButton.addActionListener(this);
+		solverType.addActionListener(this);
+		stepButton.addActionListener(this);
+		resetButton.addActionListener(this);
+		quitButton.addActionListener(this);
+		
+		timerField.addActionListener(this);
+		fontField.addActionListener(this);
+		
+		//Set up the class variables
+		doTimer();
+		doFontSize();
+		mazeLoaded = false;
+		this.maze = new Maze();
+		makeNewSolver();
     }
     
     /*
