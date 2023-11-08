@@ -174,7 +174,7 @@ JPanel pane = new JPanel(new BorderLayout());
 	doFontSize();
 	mazeLoaded = false;
 	this.maze = new Maze();
-	//makeNewSolver();
+	makeNewSolver();
     }
     
     /*

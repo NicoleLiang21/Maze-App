@@ -19,7 +19,7 @@ public class Maze{
             // Setting up and verifying number of rows/columns
             row = scan.nextInt();
             col = scan.nextInt();
-
+            /* 
             // Second scanner
             Scanner scan2 = new Scanner(new File(fname));
 
@@ -55,15 +55,16 @@ public class Maze{
                 System.out.println("Invalid, number of columns described does not match with actual number");
                 return false;
             }
-
+            */
 
             // Create the maze
             int[] types = new int[col*row];
-            System.out.println(types.length);
+            //System.out.println(types.length);
             int count = 0;
             
             while (scan.hasNext()){
                 types[count] = scan.nextInt();
+                //System.out.println(types);
                 count++; 
                 
             }
