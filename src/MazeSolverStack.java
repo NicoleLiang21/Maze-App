@@ -15,10 +15,11 @@ public class MazeSolverStack extends MazeSolver
         
         makeEmpty();
 
-        current - 
-
         maze = m;
         add(maze.getStart());
+
+        current = (Square) this.worklist.peek();
+        System.out.println(current);
     }
 
     /*
