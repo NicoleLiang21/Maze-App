@@ -16,6 +16,7 @@ public class Maze{
     {
         try (Scanner scan = new Scanner(new File(fname)))
         {
+             
             // Setting up and verifying number of rows/columns
             row = scan.nextInt();
             col = scan.nextInt();

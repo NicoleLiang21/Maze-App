@@ -12,6 +12,14 @@ public class MazeSolverStack extends MazeSolver
      */
     public MazeSolverStack(Maze m){
         super(m);
+        
+        makeEmpty();
+
+        maze = m;
+        add(maze.getStart());
+
+        current = (Square) this.worklist.peek();
+        System.out.println(current);
     }
 
     /*
@@ -19,7 +27,7 @@ public class MazeSolverStack extends MazeSolver
      */
     public void makeEmpty()
     {
-        worklist = new MyStack();
+        this.worklist = new MyStack();
     }
 
     /*
@@ -28,7 +36,7 @@ public class MazeSolverStack extends MazeSolver
      */
     public boolean isEmpty()
     {
-        if (worklist.size() == 0)
+        if (this.worklist.size() == 0)
             return true;
         
         return false;
@@ -40,7 +48,7 @@ public class MazeSolverStack extends MazeSolver
      */
     public void add(Square sq)
     {
-        worklist.push(sq);
+        this.worklist.push(sq);
     }
 
     /*
@@ -49,11 +57,11 @@ public class MazeSolverStack extends MazeSolver
      */
     public Square next()
     {
-        return (Square) worklist.pop();
+        return (Square) this.worklist.pop();
     }
     
     public boolean isSolved(){
-        if (worklist.size() == 0) return true;
+        if (this.worklist.size() == 0) return true;
         else if (current.getType() == 3) return true;
         return false;
     }
@@ -61,10 +69,10 @@ public class MazeSolverStack extends MazeSolver
     public String getPath(){
         String message = "";
 
-        if (worklist.size() == 0) message += "No such path exists; ";
+        if (this.worklist.size() == 0) message += "No such path exists; ";
         else
         {
-            while (worklist.size() != 0)
+            while (this.worklist.size() != 0)
                 message += worklist.pop(); // .remove() for queues
         }
 
@@ -75,15 +83,15 @@ public class MazeSolverStack extends MazeSolver
     }
 
     public Square step(){ 
-        if (worklist.size() == 0) return null;
-        current = (Square) worklist.pop();
+        if (this.worklist.size() == 0) return null;
+        current = (Square) this.worklist.pop();
         if (current.getType() == 3){
             getPath();
         }
         ArrayList<Square> neighbors = maze.getNeighbors(current);
         for (Square sq : neighbors){
-            if ((sq.getType() != 1 || sq.getType() != 'o' || sq.getType() != '.') && !worklist.contains(sq))
-                worklist.push(sq);
+            if ((sq.getType() != 1 || sq.getType() != 'o' || sq.getType() != '.') && !this.worklist.contains(sq))
+                this.worklist.push(sq);
         }
         
         Square sq = current;
@@ -93,7 +101,7 @@ public class MazeSolverStack extends MazeSolver
 
     public void solve(){
         // call step method until it is solved
-        while (!isSolved() || worklist.size() != 0){
+        while (!isSolved() || this.worklist.size() != 0){
             step();
         }
     }

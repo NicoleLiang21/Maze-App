@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class MyStack
 {
     // Tail of the ArrayList will be implemented as the 
-    ArrayList array;
+    ArrayList<Square> array;
     int size;
 
     /*
@@ -11,14 +11,14 @@ public class MyStack
      */
     public MyStack()
     {
-        array = new ArrayList<>();
+        array = new ArrayList<Square>();
     }
 
     /*
      * push - add an element to the top of the stack
      * @param Object element
      */
-    public void push(Object element)
+    public void push(Square element)
     {
         array.add(element);
     }
@@ -41,7 +41,7 @@ public class MyStack
      */
     public Object peek()
     {
-        return array.remove(array.size()-1);
+        return array.get(array.size()-1);
     }
 
     /*
