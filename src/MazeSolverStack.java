@@ -14,10 +14,8 @@ public class MazeSolverStack extends MazeSolver
         super(m);
         
         makeEmpty();
-
+        add(m.getStart()); //#ADD review this stuff
         maze = m;
-        add(maze.getStart());
-
         current = (Square) this.worklist.peek();
     }
 
@@ -60,7 +58,7 @@ public class MazeSolverStack extends MazeSolver
     }
     
     public boolean isSolved(){
-        if (this.worklist.size() == '_') return true;
+        if (this.worklist.size() == 0) return true;
         else if (current.getType() == 'E') return true;
         return false;
     }
@@ -86,28 +84,32 @@ public class MazeSolverStack extends MazeSolver
         current = (Square) this.worklist.pop();
 
         if (current.getType() == 'E'){
+            System.out.println("E reached");
             getPath();
         }
 
         // #ADD changing this entire thing
+        // #ADD NOTE: need to change 'o' to '.'
         ArrayList<Square> neighbors = maze.getNeighbors(current);
         for (Square sq : neighbors){
-            System.out.println("Loop called; Square is " + sq.getType());
-            if (sq.getType() == '_' && !this.worklist.contains(sq)) {// #ADD shorter if condition for valid paths only
+            if ((sq.getType() == '_' || sq.getType() == 'E') && !this.worklist.contains(sq)) {
 
-                if (neighbors.indexOf(sq) == neighbors.size() - 1) // determine if its the first path taken
-                    sq = new Square(sq.getRow(), sq.getCol(), '.');
+                // Update the map
+                // determine if its the first path taken
+                if (neighbors.indexOf(sq) == neighbors.size() - 1)
+                    sq.setType('.');
+                // otherwise its a secondary path
                 else
-                    sq = new Square(sq.getRow(), sq.getCol(), 'o'); // otherwise its a secondary path
+                    sq.setType('o');
 
                 this.worklist.push(sq);
-                maze.set(sq.getRow(), sq.getCol(), sq); // #ADD added this line & method in Maze --> gets the symbol to update
             }
         }
         
-        Square sq = current;
-        current = new Square (current.getRow(), current.getCol(), '.');
-        return sq;
+        // Update the current square
+        if (current.getType() != 'S' || current.getType() != 'E')
+            current.setType('.');
+        return current;
     }
 
     public void solve(){

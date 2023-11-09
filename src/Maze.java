@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Maze{ // #ADD
+public class Maze{
 
     private Square[][]maze;
     private int col;
@@ -109,24 +109,15 @@ public class Maze{ // #ADD
     public ArrayList<Square> getNeighbors(Square sq)
     {
         ArrayList<Square> list = new ArrayList<>();
-        int r = sq.getRow();  // #ADD got rid of -1's
+        int r = sq.getRow();
         int c = sq.getCol();
-        if (c != col - 1)  list.add(maze[r][c+1]); // #ADD added -1's
+        if (c != col - 1)  list.add(maze[r][c+1]);
         if (r != row - 1)  list.add(maze[r+1][c]);
         if (r != 0) list.add(maze[r-1][c]);
         if (c != 0)  list.add(maze[r][c-1]);
         
         return list;
 
-    }
-
-    /* #ADD
-     * Set a certain square in the maze to a new square; allows the picture to update
-     * @param row, col, square
-     */
-    public void set(int row, int col, Square square)
-    {
-        maze[row][col] = square;
     }
 
     /*

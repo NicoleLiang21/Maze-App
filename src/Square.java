@@ -41,12 +41,20 @@ public class Square {
     }
 
     /*
+     *  Change the type
+     *  @return int
+     */
+    public int setType(int t)
+    {
+        return type = t;
+    }
+
+    /*
      * toString method for this class
      * We chose to display in symbols, but we take the type as a number since that's the way in which the source file was programmed
      */
     public String toString()
     {
-        // #ADD changed this stuff -- make sure to change in programs too 
         switch (type)
         {
             case '_':
