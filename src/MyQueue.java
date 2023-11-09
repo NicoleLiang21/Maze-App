@@ -5,7 +5,7 @@ public class MyQueue {
 
     private LinkedList<Object> list;
     private int currentSize = 0;
-
+    
     public MyQueue(){
         list = new LinkedList<Object>();
     }

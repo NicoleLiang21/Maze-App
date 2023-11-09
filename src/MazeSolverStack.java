@@ -64,7 +64,8 @@ public class MazeSolverStack extends MazeSolver
 
     public String getPath(){
         String message = "";
-
+        if (isSolved())
+            return message + "the maze is solved";
         if (this.worklist.size() == 0) message += "No such path exists; ";
         else
         {
@@ -72,8 +73,6 @@ public class MazeSolverStack extends MazeSolver
                 message += worklist.pop(); // .remove() for queues
         }
 
-        if (isSolved())
-            return message + "the maze is solved";
         return message + "the maze is not solved";
 
     }
@@ -84,7 +83,8 @@ public class MazeSolverStack extends MazeSolver
 
         if (current.getType() == 'E'){
             System.out.println("E reached");
-            getPath();
+            isSolved();
+            return null;
         }
 
         ArrayList<Square> neighbors = maze.getNeighbors(current);
@@ -114,5 +114,6 @@ public class MazeSolverStack extends MazeSolver
         while (!isSolved() || this.worklist.size() != 0){
             step();
         }
+        getPath();
     }
 }

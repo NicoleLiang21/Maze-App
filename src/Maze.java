@@ -20,7 +20,7 @@ public class Maze{
             // Setting up and verifying number of rows/columns
             row = scan.nextInt();
             col = scan.nextInt();
-            /* 
+            
             // Second scanner
             Scanner scan2 = new Scanner(new File(fname));
 
@@ -44,19 +44,20 @@ public class Maze{
             scan3.nextLine();
 
             String line = scan3.nextLine();
-            int colC = 2;
+            //System.out.println("start:"+line+"end");
+            int colC = 1;
             
             while (line.contains(" "))
             {
                 colC++;
-                line = line.substring(line.indexOf(" "));
+                line = line.substring(line.indexOf(" ")+1);
             }
             if (colC != col)
             {
                 System.out.println("Invalid, number of columns described does not match with actual number");
                 return false;
             }
-            */
+            
 
             // Create the maze
             int[] types = new int[col*row];
