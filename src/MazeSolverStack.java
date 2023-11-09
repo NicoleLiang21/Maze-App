@@ -14,7 +14,7 @@ public class MazeSolverStack extends MazeSolver
         super(m);
         
         makeEmpty();
-        add(m.getStart()); //#ADD review this stuff
+        add(m.getStart());
         maze = m;
         current = (Square) this.worklist.peek();
     }
@@ -88,8 +88,6 @@ public class MazeSolverStack extends MazeSolver
             getPath();
         }
 
-        // #ADD changing this entire thing
-        // #ADD NOTE: need to change 'o' to '.'
         ArrayList<Square> neighbors = maze.getNeighbors(current);
         for (Square sq : neighbors){
             if ((sq.getType() == '_' || sq.getType() == 'E') && !this.worklist.contains(sq)) {
@@ -107,7 +105,7 @@ public class MazeSolverStack extends MazeSolver
         }
         
         // Update the current square
-        if (current.getType() != 'S' || current.getType() != 'E')
+        if (current.getType() != 'S' && current.getType() != 'E')
             current.setType('.');
         return current;
     }

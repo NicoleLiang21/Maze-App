@@ -60,11 +60,26 @@ public class Maze{
 
             // Create the maze
             int[] types = new int[col*row];
-            System.out.println(types.length);
             int count = 0;
             
             while (scan.hasNext()){
-                types[count] = scan.nextInt();
+
+                // Convert from numbers to symbols
+                switch (scan.nextInt())
+                {
+                    case 0:
+                        types[count] = '_';
+                        break;
+                    case 1:
+                        types[count] = '#';
+                        break;
+                    case 2:
+                        types[count] = 'S';
+                        break;
+                    case 3:
+                        types[count] = 'E';
+                        break;
+                }
                 count++;
                 
             }
