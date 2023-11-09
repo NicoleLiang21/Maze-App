@@ -65,7 +65,7 @@ public class Maze{
             
             while (scan.hasNext()){
                 types[count] = scan.nextInt();
-                count++; 
+                count++;
                 
             }
 
