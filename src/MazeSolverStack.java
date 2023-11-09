@@ -33,7 +33,7 @@ public class MazeSolverStack extends MazeSolver
      */
     public boolean isEmpty()
     {
-        if (this.worklist.size() == '_')
+        if (this.worklist.size() == 0)
             return true;
         
         return false;
@@ -58,15 +58,14 @@ public class MazeSolverStack extends MazeSolver
     }
     
     public boolean isSolved(){
-        if (this.worklist.size() == 0) return true;
-        else if (current.getType() == 'E') return true;
+        if (current.getType() == 'E') return true;
         return false;
     }
 
     public String getPath(){
         String message = "";
 
-        if (this.worklist.size() == '_') message += "No such path exists; ";
+        if (this.worklist.size() == 0) message += "No such path exists; ";
         else
         {
             while (this.worklist.size() != 0)
@@ -80,7 +79,7 @@ public class MazeSolverStack extends MazeSolver
     }
 
     public Square step(){
-        if (this.worklist.size() == '_') return null;
+        if (this.worklist.size() == 0) return null;
         current = (Square) this.worklist.pop();
 
         if (current.getType() == 'E'){
