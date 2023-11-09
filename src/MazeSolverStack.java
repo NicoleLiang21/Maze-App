@@ -19,7 +19,6 @@ public class MazeSolverStack extends MazeSolver
         add(maze.getStart());
 
         current = (Square) this.worklist.peek();
-        System.out.println(current);
     }
 
     /*
@@ -36,7 +35,7 @@ public class MazeSolverStack extends MazeSolver
      */
     public boolean isEmpty()
     {
-        if (this.worklist.size() == 0)
+        if (this.worklist.size() == '_')
             return true;
         
         return false;
@@ -61,15 +60,15 @@ public class MazeSolverStack extends MazeSolver
     }
     
     public boolean isSolved(){
-        if (this.worklist.size() == 0) return true;
-        else if (current.getType() == 3) return true;
+        if (this.worklist.size() == '_') return true;
+        else if (current.getType() == 'E') return true;
         return false;
     }
 
     public String getPath(){
         String message = "";
 
-        if (this.worklist.size() == 0) message += "No such path exists; ";
+        if (this.worklist.size() == '_') message += "No such path exists; ";
         else
         {
             while (this.worklist.size() != 0)
@@ -82,16 +81,28 @@ public class MazeSolverStack extends MazeSolver
 
     }
 
-    public Square step(){ 
-        if (this.worklist.size() == 0) return null;
+    public Square step(){
+        if (this.worklist.size() == '_') return null;
         current = (Square) this.worklist.pop();
-        if (current.getType() == 3){
+
+        if (current.getType() == 'E'){
             getPath();
         }
+
+        // #ADD changing this entire thing
         ArrayList<Square> neighbors = maze.getNeighbors(current);
         for (Square sq : neighbors){
-            if ((sq.getType() != 1 || sq.getType() != 'o' || sq.getType() != '.') && !this.worklist.contains(sq))
+            System.out.println("Loop called; Square is " + sq.getType());
+            if (sq.getType() == '_' && !this.worklist.contains(sq)) {// #ADD shorter if condition for valid paths only
+
+                if (neighbors.indexOf(sq) == neighbors.size() - 1) // determine if its the first path taken
+                    sq = new Square(sq.getRow(), sq.getCol(), '.');
+                else
+                    sq = new Square(sq.getRow(), sq.getCol(), 'o'); // otherwise its a secondary path
+
                 this.worklist.push(sq);
+                maze.set(sq.getRow(), sq.getCol(), sq); // #ADD added this line & method in Maze --> gets the symbol to update
+            }
         }
         
         Square sq = current;

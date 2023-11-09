@@ -46,15 +46,16 @@ public class Square {
      */
     public String toString()
     {
+        // #ADD changed this stuff -- make sure to change in programs too 
         switch (type)
         {
-            case 0:
+            case '_':
                 return "_";
-            case 1:
+            case '#':
                 return "#";
-            case 2:
+            case 'S':
                 return "S";
-            case 3:
+            case 'E':
                 return "E";
             case 'o':
                 return "o";

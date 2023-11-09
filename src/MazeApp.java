@@ -280,14 +280,14 @@ public class MazeApp extends JFrame implements ActionListener {
      * user clicks on "Step" as well as by the interval timer.
      */
     private void doStep() {
-	if (mazeLoaded && !solver.isSolved()) {
-	    solver.step();
-	    if (solver.isSolved()) {
-		solveButton();
-		timer.stop();
-	    }
-	}
-	updateMaze();
+		if (mazeLoaded && !solver.isSolved()) {
+			solver.step();
+			if (solver.isSolved()) {
+			solveButton();
+			timer.stop();
+			}
+		}
+		updateMaze();
     }
 
     /**

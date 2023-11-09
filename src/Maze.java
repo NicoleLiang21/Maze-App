@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Maze{
+public class Maze{ // #ADD
 
     private Square[][]maze;
     private int col;
@@ -60,13 +60,26 @@ public class Maze{
 
             // Create the maze
             int[] types = new int[col*row];
-            System.out.println(types.length);
             int count = 0;
             
-            while (scan.hasNext()){
-                types[count] = scan.nextInt();
-                count++; 
-                
+            while (scan.hasNextInt()){
+
+                switch (scan.nextInt())
+                {
+                    case 0:
+                        types[count] = '_';
+                        break;
+                    case 1:
+                        types[count] = '#';
+                        break;
+                    case 2:
+                        types[count] = 'S';
+                        break;
+                    case 3:
+                        types[count] = 'E';
+                        break;
+                }
+                count++;
             }
 
             maze = new Square[row][col];
@@ -75,12 +88,12 @@ public class Maze{
             {
                 for (int j = 0; j < col; j++)
                 {
-                    maze[i][j] = new Square(i,j,types[count]);
+                    maze[i][j] = new Square(i, j, types[count]);
                     count++;
                 }
-
             }
             return true;
+
         }
         catch (FileNotFoundException e)
         {
@@ -96,15 +109,24 @@ public class Maze{
     public ArrayList<Square> getNeighbors(Square sq)
     {
         ArrayList<Square> list = new ArrayList<>();
-        int r = sq.getRow()-1;
-        int c = sq.getCol()-1;
-        if (c != col)  list.add(maze[r][c+1]);
-        if (r != row)  list.add(maze[r+1][c]);
+        int r = sq.getRow();  // #ADD got rid of -1's
+        int c = sq.getCol();
+        if (c != col - 1)  list.add(maze[r][c+1]); // #ADD added -1's
+        if (r != row - 1)  list.add(maze[r+1][c]);
         if (r != 0) list.add(maze[r-1][c]);
         if (c != 0)  list.add(maze[r][c-1]);
         
         return list;
 
+    }
+
+    /* #ADD
+     * Set a certain square in the maze to a new square; allows the picture to update
+     * @param row, col, square
+     */
+    public void set(int row, int col, Square square)
+    {
+        maze[row][col] = square;
     }
 
     /*
@@ -117,7 +139,7 @@ public class Maze{
             {
                 for (int j = 0; j < col; j++)
                 {
-                    if (maze[i][j].getType() == 2){
+                    if (maze[i][j].getType() == 'S'){
                         return maze[i][j];
                     }
                 }
@@ -136,7 +158,7 @@ public class Maze{
             {
                 for (int j = 0; j < col; j++)
                 {
-                    if (maze[i][j].getType() == 3){
+                    if (maze[i][j].getType() == 'E'){
                         return maze[i][j];
                     }
                 }

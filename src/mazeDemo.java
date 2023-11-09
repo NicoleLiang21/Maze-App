@@ -5,14 +5,14 @@ public class mazeDemo{
         Maze maze = new Maze();
         
         maze.loadMaze(fileName);
-        /* 
-        maze.getNeighbors(maze.getStart());
+        
+        //maze.getNeighbors(maze.getStart());
         maze.getStart();
         maze.getEnd();
 
-        maze.reset();
-        System.out.println(maze);
-        */
+        //maze.reset();
+        //System.out.println(maze);
+        
 
     }
 }
