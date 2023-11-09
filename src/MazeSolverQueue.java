@@ -66,17 +66,16 @@ public class MazeSolverQueue extends MazeSolver {
 
     }
 
-    public Square step(){ 
+    public Square step(){ // idk how to getpath without nodes :/ also maybe try to add the start's neighbors to worklist instead of overwriting the 'S'
         if (this.worklist.size() == 0) return null;
         current = (Square) this.worklist.remove();
-        System.out.println("get type: " + current.getType());
+        //System.out.println("get type: " + current.getType());
         if (current.getType() == 'E'){
-            isSolved();
-            return null;
+            return null;// ends the step
         }
         ArrayList<Square> neighbors = maze.getNeighbors(current);
-        System.out.println(neighbors);
-        System.out.println(current);
+        //System.out.println(neighbors);
+        //System.out.println(current);
         for (Square sq : neighbors){
             if ((sq.getType() == '_' || sq.getType() == 'E') && !this.worklist.contains(sq)) {
                 this.worklist.add(sq);

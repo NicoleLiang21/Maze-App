@@ -83,7 +83,6 @@ public class MazeSolverStack extends MazeSolver
 
         if (current.getType() == 'E'){
             System.out.println("E reached");
-            isSolved();
             return null;
         }
 
