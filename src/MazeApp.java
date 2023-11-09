@@ -157,24 +157,24 @@ public class MazeApp extends JFrame implements ActionListener {
 		this.setLocationRelativeTo(null);	//center
 		this.setVisible(true);
 
-		//Actionlisteners
-		loadButton.addActionListener(this);
-		filename.addActionListener(this);
-		solveButton.addActionListener(this);
-		solverType.addActionListener(this);
-		stepButton.addActionListener(this);
-		resetButton.addActionListener(this);
-		quitButton.addActionListener(this);
-		
-		timerField.addActionListener(this);
-		fontField.addActionListener(this);
-		
-		//Set up the class variables
-		doTimer();
-		doFontSize();
-		mazeLoaded = false;
-		this.maze = new Maze();
-		makeNewSolver();
+	//Actionlisteners
+	loadButton.addActionListener(this);
+	filename.addActionListener(this);
+	solveButton.addActionListener(this);
+	solverType.addActionListener(this);
+	stepButton.addActionListener(this);
+	resetButton.addActionListener(this);
+	quitButton.addActionListener(this);
+	
+	timerField.addActionListener(this);
+	fontField.addActionListener(this);
+	
+	//Set up the class variables
+	doTimer();
+	doFontSize();
+	mazeLoaded = false;
+	this.maze = new Maze();
+	makeNewSolver();
     }
     
     /*

@@ -20,7 +20,7 @@ public class Maze{
             // Setting up and verifying number of rows/columns
             row = scan.nextInt();
             col = scan.nextInt();
-/*
+            /* 
             // Second scanner
             Scanner scan2 = new Scanner(new File(fname));
 
@@ -60,26 +60,13 @@ public class Maze{
 
             // Create the maze
             int[] types = new int[col*row];
+            System.out.println(types.length);
             int count = 0;
             
-            while (scan.hasNextInt()){
-
-                switch (scan.nextInt())
-                {
-                    case 0:
-                        types[count] = '_';
-                        break;
-                    case 1:
-                        types[count] = '#';
-                        break;
-                    case 2:
-                        types[count] = 'S';
-                        break;
-                    case 3:
-                        types[count] = 'E';
-                        break;
-                }
-                count++;
+            while (scan.hasNext()){
+                types[count] = scan.nextInt();
+                count++; 
+                
             }
 
             maze = new Square[row][col];
