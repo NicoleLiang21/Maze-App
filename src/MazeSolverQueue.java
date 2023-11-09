@@ -38,12 +38,16 @@ public class MazeSolverQueue extends MazeSolver {
     }
     
     
-    MazeSolverQueue(Maze m){
+    public MazeSolverQueue(Maze m){
         super(m);
+
+        add(m.getStart());
+        maze = m;
+        current = (Square) this.worklist.peek();
+
     }
     
     public boolean isSolved(){
-        if (worklist.size() == 0) return true;
         if (current.getType() == 3) return true;
         return false;
     }
@@ -67,18 +71,19 @@ public class MazeSolverQueue extends MazeSolver {
     public Square step(){ 
         if (worklist.size() == 0) return null;
         current = (Square) worklist.remove();
-        if (current.getType() == 3){
+        if (current.getType() == 'E'){
             getPath();
         }
         ArrayList<Square> neighbors = maze.getNeighbors(current);
         for (Square sq : neighbors){
-            if ((sq.getType() != 1 || sq.getType() != 'o' || sq.getType() != '.') && !worklist.contains(sq))
+            if ((sq.getType() == '_' || sq.getType() == 'E') && !this.worklist.contains(sq)) {
                 worklist.add(sq);
         }
+    }
         
-        Square sq = current;
-        current = new Square (current.getRow(), current.getCol(), '.');
-        return sq;
+        if (current.getType() != 'S' || current.getType() != 'E')
+            current.setType('.');
+        return current;
     }
 
     public void solve(){
