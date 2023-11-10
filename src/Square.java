@@ -2,6 +2,7 @@ public class Square {
 
     private int type;
     private int row, col;
+    private Square previous;
 
     /*
      * Constructor for the Square class
@@ -11,6 +12,7 @@ public class Square {
         type = t;
         row = r;
         col = c;
+        previous = null;
     }
 
     /*
@@ -42,11 +44,29 @@ public class Square {
 
     /*
      *  Change the type
-     *  @return int
+     *  @param int t
      */
-    public int setType(int t)
+    public void setType(int t)
     {
-        return type = t;
+        type = t;
+    }
+
+    /*
+     *  Accessor method for prevoius
+     *  @return Square
+     */
+    public Square getPrevious()
+    {
+        return previous;
+    }
+
+    /*
+     *  Connect this square to the previous one
+     *  @param Square sq
+     */
+    public void setPrevious(Square sq)
+    {
+        previous = sq;
     }
 
     /*

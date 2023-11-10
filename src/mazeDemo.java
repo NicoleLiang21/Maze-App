@@ -7,8 +7,8 @@ public class mazeDemo{
         maze.loadMaze(fileName);
         
         //maze.getNeighbors(maze.getStart());
-        maze.getStart();
-        maze.getEnd();
+        System.out.println(maze.getStart());
+        System.out.println(maze.getEnd());
 
         //maze.reset();
         //System.out.println(maze);

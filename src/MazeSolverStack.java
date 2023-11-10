@@ -7,6 +7,7 @@ public class MazeSolverStack extends MazeSolver
     private Square current;
     private Maze maze;
 
+
     /*
      * Constructor for MazeSolverStack
      */
@@ -19,6 +20,7 @@ public class MazeSolverStack extends MazeSolver
         current = (Square) this.worklist.peek();
     }
 
+
     /*
      * creates empty worklist
      */
@@ -26,6 +28,7 @@ public class MazeSolverStack extends MazeSolver
     {
         this.worklist = new MyStack();
     }
+
 
     /*
      * checks if the worklist is empty
@@ -39,6 +42,7 @@ public class MazeSolverStack extends MazeSolver
         return false;
     }
 
+
     /*
      * adds square to the worklist
      * @param square
@@ -47,6 +51,7 @@ public class MazeSolverStack extends MazeSolver
     {
         this.worklist.push(sq);
     }
+
 
     /*
      * returns the next square in the worklist
@@ -57,48 +62,68 @@ public class MazeSolverStack extends MazeSolver
         return (Square) this.worklist.pop();
     }
     
+
     public boolean isSolved(){
         if (current.getType() == 'E') return true;
+        else if (worklist.size() == 0) return true; //#ADD triggers the 'no path exists' message
         return false;
     }
 
+
     public String getPath(){
         String message = "";
-
-        if (this.worklist.size() == 0) message += "No such path exists; ";
-        else
+        
+        if (current.getType() == 'E') //#ADD x-path part
         {
-            while (this.worklist.size() != 0)
-                message += worklist.pop(); // .remove() for queues
+            MyStack track = new MyStack();
+            maze.reset();
+
+            // redrawing the maze with x's
+            while (current.getPrevious() != null)
+            {
+                current.setType('x');
+                track.push(current);
+            }
+
+            // getting the return message
+            Square sq;
+            while (track.size != 0)
+            {
+                sq = (Square) track.pop();
+                message += "[" + sq.getRow() + ", " + sq.getCol() + "] -->";
+            }
+            return message.substring(message.length() - 3);
         }
+        else if (this.worklist.size() == 0)
+            message += "No such path exists; the maze is not solved";
 
-        if (isSolved())
-            return message + "the maze is solved";
-        return message + "the maze is not solved";
-
+        return message;
     }
+
 
     public Square step(){
         if (this.worklist.size() == 0) return null;
+
         current = (Square) this.worklist.pop();
 
-        if (current.getType() == 'E'){
-            System.out.println("E reached");
+        //#ADD edit condition here
+        if (isSolved() && current.getType() != 'S')
             getPath();
-        }
-
+        
+        //#ADD changed some stuff here in regards to treating '_' and 'E' squares
         ArrayList<Square> neighbors = maze.getNeighbors(current);
         for (Square sq : neighbors){
-            if ((sq.getType() == '_' || sq.getType() == 'E') && !this.worklist.contains(sq)) {
-
-                // Update the map
-                // determine if its the first path taken
-                if (neighbors.indexOf(sq) == neighbors.size() - 1)
-                    sq.setType('.');
-                // otherwise its a secondary path
-                else
-                    sq.setType('o');
-
+            if (sq.getPrevious() == null && (sq.getType() == '_' || sq.getType() == 'E'))
+            {
+                if (sq.getType() == '_') {
+                    // determine if it's a first or second path
+                    if (neighbors.indexOf(sq) == neighbors.size() - 1)
+                        sq.setType('.');
+                    else
+                        sq.setType('o');
+                }
+                // connect this square to the previous one
+                sq.setPrevious(current);
                 this.worklist.push(sq);
             }
         }
@@ -108,6 +133,7 @@ public class MazeSolverStack extends MazeSolver
             current.setType('.');
         return current;
     }
+
 
     public void solve(){
         // call step method until it is solved
