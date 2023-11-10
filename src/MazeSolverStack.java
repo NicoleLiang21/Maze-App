@@ -72,7 +72,6 @@ public class MazeSolverStack extends MazeSolver
 
     public String getPath(){
         String message = "";
-        
         // this method is going to be called multiple times -- figure out which mode to enter
         if (maze.getEnd().getPrevious() != null) //#ADD like alllll of this
         {
@@ -153,5 +152,6 @@ public class MazeSolverStack extends MazeSolver
         while (!isSolved() || this.worklist.size() != 0){
             step();
         }
+        getPath();
     }
 }
