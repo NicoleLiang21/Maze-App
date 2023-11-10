@@ -168,7 +168,7 @@ public class Maze{
         for (int i = 0; i < row; i++){
             for (int j = 0; j < col; j++){
                 if (maze[i][j].getType() == 'o' || maze[i][j].getType() == '.' || maze[i][j].getType() == 'x'){
-                    maze[i][j] = new Square(i, j, '_');
+                    maze[i][j] = new Square(maze[i][j].getRow(), maze[i][j].getCol(), '_');
                 }
             }
         }

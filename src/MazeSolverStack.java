@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class MazeSolverStack extends MazeSolver
 {
 
-    private MyStack worklist;
+    private MyStack worklist, track; //#ADD tracking feature
     private Square current;
     private Maze maze;
 
@@ -73,30 +73,42 @@ public class MazeSolverStack extends MazeSolver
     public String getPath(){
         String message = "";
         
-        if (current.getType() == 'E') //#ADD x-path part
+        // this method is going to be called multiple times -- figure out which mode to enter
+        if (maze.getEnd().getPrevious() != null) //#ADD like alllll of this
         {
-            MyStack track = new MyStack();
-            maze.reset();
+            track = new MyStack();
+            current = maze.getEnd().getPrevious();
 
             // redrawing the maze with x's
             while (current.getPrevious() != null)
             {
-                current.setType('x');
+                if (current.getType() != 'E')
+                    current.setType('x');
                 track.push(current);
+
+                current = current.getPrevious();
             }
 
             // getting the return message
             Square sq;
-            while (track.size != 0)
+            int count = 1;
+            while (track.size() != 0)
             {
                 sq = (Square) track.pop();
                 message += "[" + sq.getRow() + ", " + sq.getCol() + "] -->";
+                
+                if (count == 4)
+                {
+                    message += "\n";
+                    count = 0;
+                }
+                count++;
             }
-            return message.substring(message.length() - 3);
+            message = message.substring(0, message.length()-4);
         }
-        else if (this.worklist.size() == 0)
-            message += "No such path exists; the maze is not solved";
-
+        else
+            message = "No such path exists";
+        
         return message;
     }
 
@@ -105,10 +117,6 @@ public class MazeSolverStack extends MazeSolver
         if (this.worklist.size() == 0) return null;
 
         current = (Square) this.worklist.pop();
-
-        //#ADD edit condition here
-        if (isSolved() && current.getType() != 'S')
-            getPath();
         
         //#ADD changed some stuff here in regards to treating '_' and 'E' squares
         ArrayList<Square> neighbors = maze.getNeighbors(current);
@@ -131,6 +139,11 @@ public class MazeSolverStack extends MazeSolver
         // Update the current square
         if (current.getType() != 'S' && current.getType() != 'E')
             current.setType('.');
+
+        //#ADD edit condition here
+        if (isSolved())
+            getPath();
+            
         return current;
     }
 

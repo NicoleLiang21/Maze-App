@@ -38,7 +38,7 @@ public class MazeApp extends JFrame implements ActionListener {
     private static int fontSize = 16;
 
     //Initial interval between animation in milliseconds
-    private static int timerInterval = 100; 
+    private static int timerInterval = 10; 
     
     private static final long serialVersionUID = 6228378229836664288L;
 
