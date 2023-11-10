@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class MazeSolverQueue extends MazeSolver {
 
-    private MyQueue worklist;
+    private MyQueue worklist, track;
     private Square current;
     private Maze maze;
 
@@ -53,17 +53,42 @@ public class MazeSolverQueue extends MazeSolver {
 
     public String getPath(){
         String message = "";
-
-        if (isSolved())// check if it is solved before if the worklist is empty because current removes from the worklist
-            return message + "the maze is solved";
-        if (this.worklist.size() == 0) message += "No such path exists; ";
-        else
+        // this method is going to be called multiple times -- figure out which mode to enter
+        if (maze.getEnd().getPrevious() != null)
         {
-            while (this.worklist.size() != 0)
-                message += this.worklist.remove(); // .pop() for Stacks
-        }
-        return message + "the maze is not solved";
+            track = new MyQueue();
+            current = maze.getEnd().getPrevious();
 
+            // redrawing the maze with x's
+            while (current.getPrevious() != null)
+            {
+                track.add(current);
+
+                current = current.getPrevious();
+            }
+
+            // getting the return message
+            Square sq;
+            int count = 1;
+            while (track.size() != 0)
+            {
+                sq = (Square) track.remove();
+                sq.setType('x');
+                message = "[" + sq.getRow() + ", " + sq.getCol() + "] -->" +message; 
+                
+                if (count == 4)
+                {
+                    message += "\n";
+                    count = 0;
+                }
+                count++;
+            }
+            message = message.substring(0, message.length()-4);
+        }
+        else
+            message = "No such path exists";
+        
+        return message;
     }
 
     public Square step(){ // idk how to getpath without nodes :/ also maybe try to add the start's neighbors to worklist instead of overwriting the 'S'
@@ -77,14 +102,20 @@ public class MazeSolverQueue extends MazeSolver {
         //System.out.println(neighbors);
         //System.out.println(current);
         for (Square sq : neighbors){
-            if ((sq.getType() == '_' || sq.getType() == 'E') && !this.worklist.contains(sq)) {
+            if (sq.getPrevious() == null && (sq.getType() == '_' || sq.getType() == 'E')) {
                 this.worklist.add(sq);
+
+            sq.setPrevious(current);
+            
         }
     }
         
-        if (current.getType() != 'S' || current.getType() != 'E')
+        if (current.getType() != 'S' && current.getType() != 'E'){
+            //System.out.println(current);
             current.setType('.');
-
+        
+        }
+            
         return current;
     }
 
